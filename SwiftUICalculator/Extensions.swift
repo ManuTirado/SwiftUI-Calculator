@@ -8,16 +8,6 @@
 import Foundation
 import SwiftUI
 
-// MARK: - extension Double
-
-extension Double {
-    
-    var clean: String {
-        // TODO: -En números grandes se inventa la mitad
-       return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
-    }
-}
-
 extension UIWindow {
     
     static var current: UIWindow? {
@@ -34,5 +24,13 @@ extension UIScreen {
     
     static var current: UIScreen? {
         UIWindow.current?.screen
+    }
+}
+
+
+extension String {
+    
+    func hasDecimalDot() -> Bool {
+        self.contains(".")
     }
 }
