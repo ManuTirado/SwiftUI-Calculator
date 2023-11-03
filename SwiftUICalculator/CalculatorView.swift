@@ -53,7 +53,8 @@ enum CalcButton {
 struct CalculatorView: View {
     
     @EnvironmentObject var environment: GlobalEnviroment
-    @State var isPortrait = false
+    @State var isPortrait = true
+    @State var isLeftSide = false
     
     let buttonSpacing: CGFloat = 12
     let buttons: [[CalcButton]] = [
@@ -65,7 +66,7 @@ struct CalculatorView: View {
     ]
     
     var body: some View {
-        ZStack (alignment: .bottom) {
+        ZStack (alignment: isLeftSide ? .bottomTrailing : .bottomLeading) {
             Color.black
                 .ignoresSafeArea()
             
@@ -74,11 +75,15 @@ struct CalculatorView: View {
                     if isPortrait {
                         Spacer(minLength: 0)
                     }
-                    Text(environment.display)
-                        .font(.system(size: 54, weight: .bold))
-                        .foregroundColor(.white)
+                    if isPortrait || !isPortrait && !isLeftSide {
+                        Text(environment.display)
+                            .font(.system(size: 54, weight: .bold))
+                            .foregroundColor(.white)
+                    }
                     if !isPortrait {
-                        Spacer(minLength: 0)
+                        if !isLeftSide {
+                            Spacer(minLength: 0)
+                        }
                         VStack(spacing: buttonSpacing) {
                             ForEach(buttons, id: \.self) { row in
                                 HStack(spacing: buttonSpacing) {
@@ -87,6 +92,14 @@ struct CalculatorView: View {
                                     }
                                 }
                             }
+                        }
+                        if isLeftSide {
+                            Spacer(minLength: 0)
+                        }
+                        if isLeftSide {
+                            Text(environment.display)
+                                .font(.system(size: 54, weight: .bold))
+                                .foregroundColor(.white)
                         }
                     }
                 }
@@ -101,6 +114,22 @@ struct CalculatorView: View {
                 }
             }
             .padding([.horizontal, .bottom], isPortrait ? 50 : 0)
+            
+            if !isPortrait {
+                Button {
+                    isLeftSide = !isLeftSide
+                } label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .padding(6)
+                        .background(Color(.lightGray))
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
+                        .opacity(0.4)
+                }
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
             guard let scene = UIWindow.current?.windowScene else { return }
