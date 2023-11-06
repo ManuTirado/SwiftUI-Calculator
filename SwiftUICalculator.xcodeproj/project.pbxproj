@@ -13,6 +13,10 @@
 		708D54EC2AF3F5AF00872BAB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D54EB2AF3F5AF00872BAB /* Extensions.swift */; };
 		708D54EE2AF3F6CC00872BAB /* GlobalEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D54ED2AF3F6CC00872BAB /* GlobalEnviroment.swift */; };
 		70C7816A2AF40CD50079B1CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70C781692AF40CD50079B1CE /* Assets.xcassets */; };
+		70F6EC812AF51146003DEC76 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6EC802AF51146003DEC76 /* SplashView.swift */; };
+		70F6EC852AF5120A003DEC76 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6EC842AF5120A003DEC76 /* ViewModifiers.swift */; };
+		70F6EC872AF51BAA003DEC76 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F6EC862AF51BAA003DEC76 /* Constants.swift */; };
+		70F6EC8A2AF52201003DEC76 /* SplashStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70F6EC892AF52201003DEC76 /* SplashStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		708D54EB2AF3F5AF00872BAB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		708D54ED2AF3F6CC00872BAB /* GlobalEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalEnviroment.swift; sourceTree = "<group>"; };
 		70C781692AF40CD50079B1CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		70F6EC802AF51146003DEC76 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		70F6EC842AF5120A003DEC76 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
+		70F6EC862AF51BAA003DEC76 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		70F6EC892AF52201003DEC76 /* SplashStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +65,10 @@
 			children = (
 				708D54DC2AF3C83A00872BAB /* SwiftUICalculatorApp.swift */,
 				708D54ED2AF3F6CC00872BAB /* GlobalEnviroment.swift */,
-				708D54DE2AF3C83A00872BAB /* CalculatorView.swift */,
+				70F6EC822AF5114F003DEC76 /* views */,
+				70F6EC832AF511F7003DEC76 /* ViewModifiers */,
 				708D54EB2AF3F5AF00872BAB /* Extensions.swift */,
+				70F6EC862AF51BAA003DEC76 /* Constants.swift */,
 				70C781692AF40CD50079B1CE /* Assets.xcassets */,
 				708D54E22AF3C84200872BAB /* Preview Content */,
 			);
@@ -71,6 +81,32 @@
 				708D54E32AF3C84200872BAB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		70F6EC822AF5114F003DEC76 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				70F6EC882AF521DE003DEC76 /* splash */,
+				708D54DE2AF3C83A00872BAB /* CalculatorView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		70F6EC832AF511F7003DEC76 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				70F6EC842AF5120A003DEC76 /* ViewModifiers.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		70F6EC882AF521DE003DEC76 /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				70F6EC892AF52201003DEC76 /* SplashStoryboard.storyboard */,
+				70F6EC802AF51146003DEC76 /* SplashView.swift */,
+			);
+			path = splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70C7816A2AF40CD50079B1CE /* Assets.xcassets in Resources */,
+				70F6EC8A2AF52201003DEC76 /* SplashStoryboard.storyboard in Resources */,
 				708D54E42AF3C84200872BAB /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +182,9 @@
 			files = (
 				708D54DF2AF3C83A00872BAB /* CalculatorView.swift in Sources */,
 				708D54DD2AF3C83A00872BAB /* SwiftUICalculatorApp.swift in Sources */,
+				70F6EC812AF51146003DEC76 /* SplashView.swift in Sources */,
+				70F6EC852AF5120A003DEC76 /* ViewModifiers.swift in Sources */,
+				70F6EC872AF51BAA003DEC76 /* Constants.swift in Sources */,
 				708D54EE2AF3F6CC00872BAB /* GlobalEnviroment.swift in Sources */,
 				708D54EC2AF3F5AF00872BAB /* Extensions.swift in Sources */,
 			);
@@ -280,6 +320,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashStoryboard.storyboard;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -308,6 +350,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = SplashStoryboard.storyboard;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

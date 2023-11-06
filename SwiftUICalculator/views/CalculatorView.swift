@@ -76,70 +76,77 @@ struct CalculatorView: View {
                         Spacer(minLength: 0)
                     }
                     if isPortrait || !isPortrait && !isLeftSide {
-                        Text(environment.display)
-                            .font(.system(size: 54, weight: .bold))
-                            .foregroundColor(.white)
+                        display
                     }
                     if !isPortrait {
                         if !isLeftSide {
                             Spacer(minLength: 0)
                         }
                         VStack(spacing: buttonSpacing) {
-                            ForEach(buttons, id: \.self) { row in
-                                HStack(spacing: buttonSpacing) {
-                                    ForEach(row, id: \.self) { button in
-                                        CalcButtonView(isPortrait: $isPortrait, button: button)
-                                    }
-                                }
-                            }
+                            numericPad
                         }
                         if isLeftSide {
                             Spacer(minLength: 0)
                         }
                         if isLeftSide {
-                            Text(environment.display)
-                                .font(.system(size: 54, weight: .bold))
-                                .foregroundColor(.white)
+                            display
                         }
                     }
                 }
                 if isPortrait {
-                    ForEach(buttons, id: \.self) { row in
-                        HStack(spacing: buttonSpacing) {
-                            ForEach(row, id: \.self) { button in
-                                CalcButtonView(isPortrait: $isPortrait, button: button)
-                            }
-                        }
-                    }
+                    numericPad
                 }
             }
             .padding([.horizontal, .bottom], isPortrait ? 50 : 0)
             
             if !isPortrait {
-                Button {
-                    isLeftSide = !isLeftSide
-                } label: {
-                    Image(systemName: "arrow.left.arrow.right")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                        .padding(6)
-                        .background(Color(.lightGray))
-                        .foregroundColor(.white)
-                        .cornerRadius(25)
-                        .opacity(0.4)
-                }
+                swipePadButton
             }
         }
+        .transition(.slide)
+        .animation(.easeInOut, value: isPortrait)
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
             guard let scene = UIWindow.current?.windowScene else { return }
-            self.isPortrait = scene.interfaceOrientation.isPortrait
+            withAnimation {
+                self.isPortrait = scene.interfaceOrientation.isPortrait
+            }
         }
     }
     
     @ViewBuilder
-    var content: some View {
-        EmptyView()
+    var display: some View {
+        Text(environment.display)
+            .modifier(TextDisplayModifier())
+    }
+    
+    @ViewBuilder
+    var numericPad: some View {
+        ForEach(buttons, id: \.self) { row in
+            HStack(spacing: buttonSpacing) {
+                ForEach(row, id: \.self) { button in
+                    CalcButtonView(isPortrait: $isPortrait, button: button)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var swipePadButton: some View {
+        Button {
+            withAnimation {
+                isLeftSide = !isLeftSide
+            }
+        } label: {
+            Constants.Images.swipePad
+                .resizable()
+                .scaledToFit()
+                .frame(width: 25, height: 25)
+                .padding(6)
+                .background(Color(.lightGray))
+                .foregroundColor(.white)
+                .cornerRadius(25)
+                .opacity(0.4)
+        }
     }
 }
 
@@ -155,16 +162,13 @@ struct CalcButtonView: View {
             environment.receiveInput(button: button)
         }, label: {
             Text(button.title)
-                .font(.system(size: 32, weight: .bold))
-                .frame(width: buttonWidth(button: button), height: buttonHeight())
-                .foregroundColor(.white)
-                .background(button.backgroundColor)
-                .cornerRadius(buttonWidth(button: button))
-                .overlay(
-                    Capsule()
-                        .stroke(environment.operation == button ? .red : .clear, lineWidth: 5)
-                        .frame(width: buttonWidth(button: button), height: buttonHeight())
-                )
+                .modifier(
+                    ButtonTextModifier(buttonWidth: buttonWidth(button: button),
+                                       buttonHeight: buttonHeight(),
+                                       backgroundColor: button.backgroundColor,
+                                       isSelected: {
+                                           environment.operation == button
+                                       }))
         })
     }
     
@@ -184,7 +188,6 @@ struct CalcButtonView: View {
         } else {
             return ((UIScreen.current?.bounds.height ?? 0) - 5 * 12) / 6
         }
-        
     }
 }
 

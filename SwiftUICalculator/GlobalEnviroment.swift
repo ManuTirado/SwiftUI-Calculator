@@ -12,13 +12,12 @@ class GlobalEnviroment: ObservableObject {
     @Published var display: String = ""
     @Published var operation: CalcButton?
     
-    private let undefinedTitle: String = "undefined"
     private var num1: NSDecimalNumber?
     private var num2: NSDecimalNumber?
     private var previousButton: CalcButton?
     
     func receiveInput(button: CalcButton) {
-        if display == undefinedTitle {
+        if display == Constants.Texts.undefined {
             display = ""
         }
         switch button {
@@ -54,7 +53,7 @@ class GlobalEnviroment: ObservableObject {
                 num2 = NSDecimalNumber(string: display)
             }
             let res: NSDecimalNumber? = resolveOperation()
-            display = res?.stringValue ?? undefinedTitle
+            display = res?.stringValue ?? Constants.Texts.undefined
             operation = nil
             if let res = res {
                 num1 = res

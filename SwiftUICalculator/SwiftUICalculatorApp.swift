@@ -11,8 +11,8 @@ import SwiftUI
 struct SwiftUICalculatorApp: App {
     var body: some Scene {
         WindowGroup {
-            CalculatorView()
-                .environmentObject(GlobalEnviroment())
+            SplashView()
+                .preferredColorScheme(.dark)
         }
     }
 }
